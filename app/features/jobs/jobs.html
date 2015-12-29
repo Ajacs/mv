@@ -1,0 +1,85 @@
+<div class="jobs l-background">
+<div class="wrapper">
+    <div class="form-signin">
+    <div ng-include="'scripts/partial/header.html'"></div>
+        <div class="jobs-table">
+
+        <div class="title">
+        <h2>Jobs</h2>
+        </div>
+
+        <div class="header-filter">
+                  <div class="title-filter">Filters: </div>
+                  <select class="dropdown dropdown-position" ng-model="dropdownItm">
+                    <option value="jobId">Job Id</option>
+                    <option value="headline">HeadLine</option>
+                    <option value="client">Client</option>
+                  </select>
+                  <!--<div class="dropdown dropdown-position">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      Select Filter
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li>Job Id</li>
+                      <li>Headline</li>
+                      <li>Client</li>
+                    </ul>
+                  </div>-->
+                  <div class="title-contains">contains</div>
+                  <div class="input">
+                    <input type="text" class="form-control input-text" ng-model="searchText"/>
+                  </div>
+                  <div style="background-color: #2D669F !important;display: inline-block;width: 100px;height: 30px;margin-left: 15px;margin-top: 6px;line-height: 2;padding-left: 25px;color: white;border-radius: 5px;" ng-click="search()">Search</div>
+        </div>
+
+        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" style="">
+                <thead class="thead">
+                    <tr>
+                        <th>Job Id</th>
+                        <th>Headline</th>
+                        <th>Client</th>
+                        <th>Status</th>
+                        <th>Type</th>
+                        <th>Lang</th>
+                        <th>Publish Date</th>
+                        <th>Modified</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+
+                <tbody class="tbody">
+                    <tr ng-repeat="job in jobs">
+                        <td>{{ job.jobId }}</td>
+                        <td ng-if="job.wasPublished==false">
+                          {{ job.headline }}
+                        </td>
+                        <td ng-if="job.wasPublished==true">
+                          <a href="#" style="color:#0000AA">{{ job.headline }}</a>
+                        </td>
+                        <td>{{ job.client }}</td>
+                        <td>
+                          <div ng-class="{'state-published': job.workflowState==='Published/Pending'}">{{ job.workflowState }}</div>
+                        </td>
+                        <td>{{ job.jobType }}</td>
+                        <td>{{ job.defaultLanguaje.language }}</td>
+                        <td ng-if="job.firstPublishDate!==null">
+                          {{ job.firstPublishDate | date : 'dd-MMM-yy'}}
+                        </td>
+                        <td ng-if="job.firstPublishDate==null">
+                          {{ defaultDate | date : 'dd-MMM-yy'}}
+                        </td>
+                        <td>{{ job.lastMofifiedDate | date : 'dd-MMM-yy'}}</td>
+                        <td><a href="http://localhost/omt-web/com.prnewswire.multivu.omt.main.Multivu/Multivu.html?to=wsView&jobId={{job.jobId}}"><img src="images/view.png"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        <div class="btn btn-lg btn-primary btn-block btn-job" type="submit" ng-click="createJob()">Create Job</div>
+        </div>
+
+  <div ng-include="'scripts/partial/footer.html'"></div>
+  </div>
+
+</div>
+</div>
